@@ -19,7 +19,7 @@ void VectorLoading(std::vector<int> &vec, const std::string &text)
 
 void productMatrix(const std::vector<int> &multiplier_one,
                    const std::vector<int> &multiplier_two,
-                   std::vector<long long> &result, // ИЗМЕНЕНО: long long
+                   std::vector<long long> &result,
                    std::size_t size)
 {
     result.resize(size * size);
@@ -29,7 +29,6 @@ void productMatrix(const std::vector<int> &multiplier_one,
     {
         for (std::size_t k = 0; k < size; ++k)
         {
-            // ИЗМЕНЕНО: long long, чтобы умножение a_ik * multiplier_two не переполняло int
             long long a_ik = multiplier_one[i * size + k];
 
             for (std::size_t j = 0; j < size; ++j)
@@ -40,7 +39,7 @@ void productMatrix(const std::vector<int> &multiplier_one,
     }
 }
 
-void WriteResult(const std::vector<long long> &result, std::string_view filename, std::size_t size) // ИЗМЕНЕНО: long long
+void WriteResult(const std::vector<long long> &result, std::string_view filename, std::size_t size)
 {
     std::string full_path = "../../../labs/matrices/result/" + std::string(filename);
     std::ofstream file(full_path);
@@ -66,7 +65,7 @@ int main()
 {
     std::vector<int> matrix_one;
     std::vector<int> matrix_two;
-    std::vector<long long> matrix_result; // ИЗМЕНЕНО: long long
+    std::vector<long long> matrix_result;
 
     std::string m200_1 = "../../../labs/matrices/data/m200_1.txt";
     std::string m200_2 = "../../../labs/matrices/data/m200_2.txt";
@@ -141,8 +140,6 @@ int main()
     auto end_time = std::chrono::steady_clock::now();
 
     auto time = end_time - start_time;
-
-    time = time / 1000000000;
 
     switch (size_matrix)
     {
