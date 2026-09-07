@@ -39,7 +39,7 @@ void productMatrix(const std::vector<int> &multiplier_one,
     }
 }
 
-void WriteResult(const std::vector<long long> &result, std::string_view filename, std::size_t size)
+void WriteResult(const std::vector<long long> &result, std::string_view filename, std::size_t size, const auto &time)
 {
     std::string full_path = "../../../labs/matrices/result/" + std::string(filename);
     std::ofstream file(full_path);
@@ -48,6 +48,11 @@ void WriteResult(const std::vector<long long> &result, std::string_view filename
     {
         throw std::logic_error("Файл не открылся");
     }
+
+    std::print(file, "Время выполнения: {}", time);
+    std::println(file, "");
+    std::print(file, "Количество элементов матрицы: {}", size * size);
+    std::println(file, "\n");
 
     for (std::size_t i = 0; i < size; ++i)
     {
@@ -146,42 +151,40 @@ int main()
     case 200:
     {
         std::string path = "result200.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     case 400:
     {
         std::string path = "result400.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     case 800:
     {
         std::string path = "result800.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     case 1200:
     {
         std::string path = "result1200.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     case 1600:
     {
         std::string path = "result1600.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     case 2000:
     {
         std::string path = "result2000.txt";
-        WriteResult(matrix_result, path, size_matrix);
+        WriteResult(matrix_result, path, size_matrix, time);
         break;
     }
     }
-
-    std::println("Время выполнения умножения: {}", time);
 
     return 0;
 }
