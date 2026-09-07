@@ -23,7 +23,7 @@ int main()
     }
 
     std::string full_path = "../../../labs/matrices/data/" + filename;
-    std::ofstream file(full_path, std::ios::app);
+    std::ofstream file(full_path);
 
     if (!file)
     {
