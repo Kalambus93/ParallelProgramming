@@ -1,5 +1,4 @@
 .*/
 build/
 out/
-data/
-result/
+matrices/
