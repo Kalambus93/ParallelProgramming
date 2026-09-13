@@ -49,9 +49,9 @@ void WriteResult(const std::vector<long long> &result, std::string_view filename
         throw std::logic_error("Файл не открылся");
     }
 
-    std::print(file, "Время выполнения: {}", time);
+    std::print(file, "#Время выполнения: {}", time);
     std::println(file, "");
-    std::print(file, "Количество элементов матрицы: {}", size * size);
+    std::print(file, "#Количество элементов матрицы: {}", size * size);
     std::println(file, "\n");
 
     for (std::size_t i = 0; i < size; ++i)
