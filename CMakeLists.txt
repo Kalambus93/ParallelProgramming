@@ -12,6 +12,7 @@ endif()
 
 project("pp" LANGUAGES CXX)
 
+find_package(MPI REQUIRED COMPONENTS CXX)
 find_package(OpenMP REQUIRED)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -24,4 +25,3 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 add_subdirectory("labs")
-#add_subdirectory("practices")
