@@ -89,8 +89,7 @@ bool WriteRecord(
     int matrix_size,
     double elapsed)
 {
-    // Пытаемся создать родительскую папку, если её нет.
-    // Если не получилось — просто игнорируем, ofstream ниже вернёт false.
+
     try
     {
         std::filesystem::create_directories(
@@ -100,8 +99,6 @@ bool WriteRecord(
     {
     }
 
-    // Режим std::ios::app означает append:
-    // файл не стирается, а новые данные дописываются в конец.
     std::ofstream file(path, std::ios::app);
 
     if (!file)
@@ -151,7 +148,6 @@ int main(int argc, char **argv)
             }
 
             // Если размер не делится на количество процессов, пропускаем.
-            // Все процессы принимают одинаковое решение, поэтому MPI не сломается.
             if (n <= 0 || n % procs != 0)
             {
                 if (rank == 0)
@@ -210,8 +206,6 @@ int main(int argc, char **argv)
                 }
             }
 
-            // Все процессы должны одинаково узнать, удалось ли загрузить файлы.
-            // Иначе можно получить зависание на коллективных MPI-операциях.
             MPI_Bcast(&load_ok, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
             if (!load_ok)
@@ -256,7 +250,6 @@ int main(int argc, char **argv)
                           << " сек" << std::endl;
             }
 
-            // Собираем результат на процессе 0
             std::vector<long long> result;
 
             if (rank == 0)
@@ -269,7 +262,6 @@ int main(int argc, char **argv)
                        local_total, MPI_LONG_LONG_INT,
                        0, MPI_COMM_WORLD);
 
-            // Пишем результат только на процессе 0
             if (rank == 0)
             {
                 std::string output_path =
